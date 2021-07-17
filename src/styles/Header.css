@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Volkhov:ital@1&display=swap');
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  text-transform: none;
+  font-family: 'Volkhov', serif;
+  font-size: 6vw;
+  cursor: pointer;
+}
+
+.divider {
+  margin: 10px;
+  width: 100%;
+  background-color: gray;
+}
