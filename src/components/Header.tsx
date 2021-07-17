@@ -6,7 +6,7 @@ const Header: React.FC = () => {
   return (
     <div className="header">
       <Link to="/" className="title">
-        Preferably Jiqyasa
+        <span>&#9001;</span>Preferably Jiqyasa{" "} <span>/&#9002;</span>
       </Link>
       <hr className="divider"/>
     </div>
