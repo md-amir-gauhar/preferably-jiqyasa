@@ -10,10 +10,19 @@ import Result from './pages/Result/Result';
 
 import './styles/App.css';
 
-function App() {
-  const [name, setName] = useState('');
+type Question = {
+  category: string;
+  correct_answer: string;
+  difficulty: string;
+  incorrect_answers: string[];
+  question: string;
+  type: string;
+};
 
-  const [questions, setQuestions] = useState<string[] | null>([]);
+function App() {
+  const [name, setName] = useState<string>('');
+
+  const [questions, setQuestions] = useState<string[]>([]);
   const [score, setScore] = useState(0);
 
   const fetchQuestion = async (
@@ -25,7 +34,7 @@ function App() {
         category && `category=${category}`
       }&${difficulty && `difficulty=${difficulty}`}&type=multiple`
     );
-    setQuestions(data.results);
+    setQuestions([data.results]);
   };
   return (
     <Router>
@@ -37,7 +46,13 @@ function App() {
             <Home name={name} setName={setName} fetchQuestion={fetchQuestion} />
           </Route>
           <Route path="/quiz" exact>
-            <Quiz />
+            <Quiz
+              name={name}
+              questions={questions}
+              score={score}
+              setScore={setScore}
+              setQuestions={setQuestions}
+            />
           </Route>
           <Route path="/result" exact>
             <Result />

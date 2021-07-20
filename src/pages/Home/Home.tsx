@@ -14,7 +14,7 @@ interface Category {
 
 interface Props {
   name: string;
-  setName?: Dispatch<SetStateAction<string>>;
+  setName: Dispatch<SetStateAction<string>>;
   fetchQuestion: (category: string, difficulty: string) => any;
 }
 
@@ -26,7 +26,7 @@ const Home: React.FC<Props> = ({ name, setName, fetchQuestion }) => {
   const history = useHistory();
 
   const handleSubmit = () => {
-    if (!category || !difficulty) {
+    if (!category || !difficulty || !name) {
       setError(true);
       return;
     } else {
@@ -41,7 +41,12 @@ const Home: React.FC<Props> = ({ name, setName, fetchQuestion }) => {
         <span className="setting-heading">Quiz Settings</span>
         <div className="setting_select">
           {error && <ErrorMessage>Please fill all the fields</ErrorMessage>}
-          <TextField label="Enter your name" variant="outlined" />
+          <TextField
+            label="Enter your name"
+            variant="outlined"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
           <TextField
             select
@@ -55,6 +60,7 @@ const Home: React.FC<Props> = ({ name, setName, fetchQuestion }) => {
               </MenuItem>
             ))}
           </TextField>
+
           <TextField
             select
             label="Select Difficulty"
@@ -71,6 +77,7 @@ const Home: React.FC<Props> = ({ name, setName, fetchQuestion }) => {
               Hard
             </MenuItem>
           </TextField>
+
           <Button
             variant="contained"
             color="primary"
